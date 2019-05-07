@@ -1,14 +1,31 @@
 package main
 
 import (
+	"encoding/json"
 	"log"
+	"net/http"
 	"time"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
+func Kick(chatid int64, userid int) {
+	bot, err := tgbotapi.NewBotAPI("669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA")
+	//token := "669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA"
+	if err != nil {
+		log.Panic(err)
+	}
+	t := time.Date(2001, time.September, 9, 1, 46, 40, 0, time.UTC)
+	k := tgbotapi.ChatMemberConfig{
+		ChatID: chatid,
+		UserID: userid,
+	}
+	bot.KickChatMember(tgbotapi.KickChatMemberConfig{k, t.Unix()})
+}
+
 func main() {
 	bot, err := tgbotapi.NewBotAPI("669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA")
+	token := "669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA"
 	if err != nil {
 		log.Panic(err)
 	}
@@ -33,18 +50,30 @@ func main() {
 				k := tgbotapi.ChatMemberConfig{
 					ChatID: update.Message.Chat.ID,
 					UserID: update.Message.ReplyToMessage.From.ID,
-				} //update.Message.ReplyToMessage.From.ID
-				bot.KickChatMember(tgbotapi.KickChatMemberConfig{k, t.Unix()})
-				//tgbotapi.KickChatMemberConfig{tgbotapi.ChatMemberConfig{chatID, "@grobkernux", " ", bot.GetChatMember(tgbotapi.ChatConfigWithUser{chatID, "@grobkernux", update.Message.From.ID})}, t.Unix()}
-				//if update.Message.From.Id.IsAdmin(update.Message.From.ID)
-				//bot.GetChatAdministrators(tgbotapi.ChatConfig{update.Message.Chat.ID, ""})
-			case "stable":
-				uid := update.Message.From.ID
-				roll := tgbotapi.ChatMember{tgbotapi.User{update.Message.From.ID, update.Message.From.FirstName}, update.Message.From.ID}.IsAdministrator()
-				if roll == true {
-					messid := update.Message.MessageID
-					msg.Text = "I'm ready"
 				}
+				chid := update.Message.Chat.ID
+				uid := update.Message.From.ID
+				uid_string := string(uid)
+				bot.KickChatMember(tgbotapi.KickChatMemberConfig{k, t.Unix()})
+				api_get, err := http.Get("https://api.telegram.org/bot" + token + "/getChatMember?chat_id=@grobkernux&user_id" + uid_string)
+				if err != nil {
+					log.Println(err)
+				}
+				var api map[string]interface{}
+				json.NewDecoder(api_get.Body).Decode(&api)
+				state := api["result"].(map[string]interface{})
+				state_string := state["status"].(string)
+				switch state_string {
+				case "admin":
+					Kick(chid, uid)
+				case "creator":
+					Kick(chid, uid)
+				default:
+					msg.Text = "You are not admin"
+				}
+			case "stable":
+			//	uid := update.Message.From.ID
+			//	roll := tgbotapi.ChatMember{tgbotapi.User{update.Message.From.ID, update.Message.From.FirstName}, update.Message.From.ID}.IsAdministrator()
 
 			default:
 				msg.Text = "I don't know that command"
