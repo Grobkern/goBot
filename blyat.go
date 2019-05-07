@@ -10,9 +10,9 @@ import (
 )
 
 func Kick(chatid int64, userid int) {
-	bot, err := tgbotapi.NewBotAPI("669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA")
-	//token := "669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA"
-	if err != nil {
+	//bot, err := tgbotapi.NewBotAPI("669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA")
+	token := "669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA"
+	/*if err != nil {
 		log.Panic(err)
 	}
 	t := time.Date(2001, time.September, 9, 1, 46, 40, 0, time.UTC)
@@ -21,6 +21,9 @@ func Kick(chatid int64, userid int) {
 		UserID: userid,
 	}
 	bot.KickChatMember(tgbotapi.KickChatMemberConfig{k, t.Unix()})
+	*/
+	usid := string(userid)
+	http.Get("https://api.telegram.org/bot" + token + "/kickChatMember?chat_id=@grobkernux&user_id=" + usid)
 }
 
 func main() {
@@ -61,16 +64,19 @@ func main() {
 				}
 				var api map[string]interface{}
 				json.NewDecoder(api_get.Body).Decode(&api)
-				state := api["result"].(map[string]interface{})
-				state_string := state["status"].(string)
-				switch state_string {
-				case "admin":
-					Kick(chid, uid)
-				case "creator":
-					Kick(chid, uid)
-				default:
-					msg.Text = "You are not admin"
+				if api != nil {
+					state := api["result"].(map[string]string)
+					state_string := state["status"]
+					switch string(state_string) {
+					case "admin":
+						Kick(chid, uid)
+					case "creator":
+						Kick(chid, uid)
+					default:
+						msg.Text = "You are not admin"
+					}
 				}
+
 			case "stable":
 			//	uid := update.Message.From.ID
 			//	roll := tgbotapi.ChatMember{tgbotapi.User{update.Message.From.ID, update.Message.From.FirstName}, update.Message.From.ID}.IsAdministrator()
