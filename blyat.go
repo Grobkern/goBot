@@ -78,6 +78,7 @@ func main() {
 				app := kek{}
 				//var api map[string]interface{}
 				json.NewDecoder(apiGet.Body).Decode(&app)
+				log.Print(app)
 				switch string(app.Result.Status) {
 				case "administrator":
 					Kick(chid, uid)
