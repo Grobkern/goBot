@@ -72,7 +72,7 @@ func main() {
 				var app = kek{}
 				//var api map[string]interface{}
 				json.NewDecoder(apiGet.Body).Decode(&app)
-				switch string(app.result.status) {
+				switch string(app.result.user.status) {
 				case "administrator":
 					Kick(chid, uid)
 				case "creator":
