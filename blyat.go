@@ -62,7 +62,7 @@ func main() {
 				chid := update.Message.Chat.ID
 				uid := update.Message.From.ID
 				uidString := string(uid)
-				apiGet, err := http.Get("https://api.telegram.org/bot" + token + "/getChatMember?chat_id=@grobkernux&user_id" + uidString)
+				apiGet, err := http.Get("https://api.telegram.org/bot" + token + "/getChatMember?chat_id=@grobkernux&user_id=" + uidString)
 				if err != nil {
 					log.Println(err)
 				}
