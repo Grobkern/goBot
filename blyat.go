@@ -110,10 +110,11 @@ func main() {
 
 			case "stable":
 				log.Print(chaid)
+				strstableid := strconv.Itoa(stableid)
 				chid := update.Message.Chat.ID
 				strchaid := strconv.FormatInt(chaid, 10)
 				strchid := strconv.FormatInt(chid, 10)
-				http.Get("https://api.telegram.org/bot669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA/forwardMessage?chat_id=" + strchid + "&from_chat_id=" + strchaid + "&message_id=" + strchid)
+				http.Get("https://api.telegram.org/bot669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA/forwardMessage?chat_id=" + strchid + "&from_chat_id=" + strchaid + "&message_id=" + strstableid)
 			default:
 
 			}
