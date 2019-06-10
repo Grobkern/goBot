@@ -90,6 +90,13 @@ func main() {
 				}
 				msg.Text = "You are gay with chance:" + strconv.Itoa(gayRand) + "%"
 				counter++
+			case "8":
+				gayRand = rand.Intn(1)
+				if gayRand == 1 {
+					msg.Text = "Мой ответ да"
+				} else {
+					msg.Text = "Мой ответ нет"
+				}
 			case "Foxed":
 				msg.Text = "http://qiwi.me/f0x1d"
 			case "stable":

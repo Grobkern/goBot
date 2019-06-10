@@ -25,6 +25,5 @@ func checkAdmin(_strchatID *string, _struserID *string, _chatID *int64, _userID 
 	case "creator":
 		kick(*_replyID, *_chatID)
 	default:
-
 	}
 }
