@@ -68,7 +68,7 @@ func main() {
 				msg.Text = "try /ban and /f"
 			case "ban":
 				chid := update.Message.Chat.ID
-				uid := update.Message.From.ID
+				//uid := update.Message.From.ID
 				ban_id := update.Message.ReplyToMessage.From.ID
 				//uidString := string(uid)
 				apiGet, err := http.Get("https://api.telegram.org/bot669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA/getChatMember?chat_id=@grobkernux&user_id=404334300")
