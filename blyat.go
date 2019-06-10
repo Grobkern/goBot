@@ -74,7 +74,7 @@ func main() {
 				if err != nil {
 					log.Println(err)
 				}
-				log.Print(apiGet)
+				log.Print(apiGet.Body)
 				app := kek{}
 				//var api map[string]interface{}
 				json.NewDecoder(apiGet.Body).Decode(&app)
