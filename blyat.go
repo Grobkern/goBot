@@ -5,6 +5,7 @@ import (
 	"math/rand"
 	"net/http"
 	"strconv"
+	"time"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
@@ -24,7 +25,10 @@ type kek struct {
 }
 
 func main() {
-	var gayRand int
+	var (
+		gayRand int
+		counter int
+	)
 	var (
 		replyID int
 		//strreplyID string
@@ -78,7 +82,15 @@ func main() {
 				http.Get("https://api.telegram.org/bot" + token + "/sendSticker?chat_id=" + strchatID + "&sticker=CAADAgADsgADTptkAm1WnTBWvUfiAg")
 			case "gay":
 				gayRand = rand.Intn(100)
-				msg.Text = strconv.Itoa(gayRand)
+				if counter == 5 {
+					msg.Text = "Wait"
+					bot.Send(msg)
+					time.Sleep(10 * time.Second)
+					counter = 0
+				}
+				msg.Text = "You are gay with chance:" + strconv.Itoa(gayRand) + "%"
+				counter++
+
 			case "stable":
 				strstableID = strconv.Itoa(stableID)
 				chatID = update.Message.Chat.ID
