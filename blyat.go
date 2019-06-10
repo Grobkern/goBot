@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"math/rand"
 	"net/http"
 	"strconv"
 
@@ -23,6 +24,7 @@ type kek struct {
 }
 
 func main() {
+	var gayRand int
 	var (
 		replyID int
 		//strreplyID string
@@ -74,6 +76,9 @@ func main() {
 				chatID = update.Message.Chat.ID
 				strchatID = strconv.FormatInt(chatID, 10)
 				http.Get("https://api.telegram.org/bot" + token + "/sendSticker?chat_id=" + strchatID + "&sticker=CAADAgADsgADTptkAm1WnTBWvUfiAg")
+			case "gay":
+				gayRand = rand.Intn(100)
+				msg.Text = strconv.Itoa(gayRand)
 			case "stable":
 				strstableID = strconv.Itoa(stableID)
 				chatID = update.Message.Chat.ID
