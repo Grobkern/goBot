@@ -75,7 +75,7 @@ func main() {
 				case "creator":
 					Kick(chid, uid)
 				default:
-					msg.Text = "You are not admin"
+					//msg.Text = "You are not admin"
 				}
 
 			case "stable":
