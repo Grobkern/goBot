@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"log"
 	"net/http"
 	"strconv"
@@ -23,37 +22,24 @@ type kek struct {
 	} `json:"result"`
 }
 
-func kick(chatid int64, userid int) {
-	//token := "669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA"
-	log.Print(userid)
-	usid := strconv.Itoa(userid)
-	basechatid := strconv.FormatInt(chatid, 10)
-	log.Print(usid)
-	http.Get("https://api.telegram.org/bot669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA/kickChatMember?chat_id=" + basechatid + "&user_id=" + usid)
-	//http.Get("https://api.telegram.org/bot" + token + "/kickChatMember?chat_id=@grobkernux&user_id=" + usid)
-}
-func adminCheck(_chid *int64, _uid *int, _token *string) {
-	apiGet, err := http.Get("https://api.telegram.org/bot" + *_token + "/getChatMember?chat_id=@grobkernux&user_id" + string(*_uid))
-	if err != nil {
-		log.Println(err)
-	}
-	var app = kek{}
-	//var api map[string]interface{}
-	json.NewDecoder(apiGet.Body).Decode(&app)
-	switch string(app.Result.Status) {
-	case "admin":
-		kick(*_chid, *_uid)
-	case "creator":
-		kick(*_chid, *_uid)
-	default:
-		//msg.Text = "lel"
-	}
-}
 func main() {
-	var chaid int64
-	var stableid int
+	var (
+		replyID    int
+		strreplyID string
+	)
+	var (
+		chatID    int64
+		strchatID string
+	)
+	var (
+		userID    int
+		struserID string
+	)
+	var (
+		stableID    int
+		strstableID string
+	)
 	bot, err := tgbotapi.NewBotAPI("669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA")
-	//token := "669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA"
 	if err != nil {
 		log.Panic(err)
 	}
@@ -66,55 +52,25 @@ func main() {
 		if update.Message == nil {
 			continue
 		}
-
 		log.Printf("[%s] %s", update.Message.From.UserName, update.Message.Text)
 		if update.Message.IsCommand() {
 			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "")
-			chid := update.Message.Chat.ID
-
-			//uid := update.Message.From.ID
-			banID := update.Message.ReplyToMessage.From.ID
-			uid := update.Message.From.ID
-			uidstr := strconv.Itoa(uid)
-			//_banID := strconv.Itoa(banID)
-			//uidString := string(uid)
 			switch update.Message.Command() {
-
 			case "help":
 				msg.Text = "try /ban and /f"
 			case "ban":
-
-				apiGet, err := http.Get("https://api.telegram.org/bot669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA/getChatMember?chat_id=@grobkernux&user_id=" + uidstr)
-				//apiGet, err := http.Get("https://api.telegram.org/bot" + token + "/getChatMember?chat_id=@grobkernux&user_id=" + uidString)
-				if err != nil {
-					log.Println(err)
-				}
-				log.Print(apiGet.Body)
-				app := kek{}
-				//var api map[string]interface{}
-				json.NewDecoder(apiGet.Body).Decode(&app)
-				log.Print(app)
-				switch app.Result.Status {
-				case "creator":
-					kick(chid, banID)
-				case "administrator":
-					kick(chid, banID)
-				default:
-					ban := tgbotapi.NewMessage(update.Message.Chat.ID, "No no no")
-					bot.Send(ban)
-				}
-
+				checkAdmin(strchatID, struserID, &chatID, &userID)
 			case "savestab":
-				stableid = update.Message.MessageID
-				chaid = update.Message.Chat.ID
+				stableID = update.Message.MessageID
+				chatID = update.Message.Chat.ID
 
 			case "stable":
-				log.Print(chaid)
-				strstableid := strconv.Itoa(stableid)
-				chid := update.Message.Chat.ID
-				strchaid := strconv.FormatInt(chaid, 10)
-				strchid := strconv.FormatInt(chid, 10)
-				http.Get("https://api.telegram.org/bot669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA/forwardMessage?chat_id=" + strchid + "&from_chat_id=" + strchaid + "&message_id=" + strstableid)
+				strstableID = strconv.Itoa(stableID)
+				chatID = update.Message.Chat.ID
+				strchatID = strconv.FormatInt(chatID, 10)
+				chatID2 := update.Message.Chat.ID
+				strchatID2 := strconv.FormatInt(chatID, 10)
+				http.Get("https://api.telegram.org/bot669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA/forwardMessage?chat_id=" + strchatID2 + "&from_chat_id=" + strchatID + "&message_id=" + strstableID)
 			default:
 
 			}
