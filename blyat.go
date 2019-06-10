@@ -23,7 +23,7 @@ type kek struct {
 }
 
 func kick(chatid int64, userid int) {
-	token := "669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA"
+	//token := "669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA"
 	log.Print(userid)
 	usid := string(userid)
 	log.Print(usid)
