@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"strconv"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
@@ -25,7 +26,7 @@ type kek struct {
 func kick(chatid int64, userid int) {
 	//token := "669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA"
 	log.Print(userid)
-	usid := string(userid)
+	usid := strconv.Itoa(userid)
 	log.Print(usid)
 	http.Get("https://api.telegram.org/bot669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA/kickChatMember?chat_id=@grobkernux&user_id=" + usid)
 	//http.Get("https://api.telegram.org/bot" + token + "/kickChatMember?chat_id=@grobkernux&user_id=" + usid)
