@@ -22,7 +22,7 @@ type kek struct {
 	} `json:"result"`
 }
 
-func Kick(chatid int64, userid int) {
+func kick(chatid int64, userid int) {
 	token := "669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA"
 	usid := string(userid)
 	log.Print(usid)
@@ -38,9 +38,9 @@ func adminCheck(_chid *int64, _uid *int, _token *string) {
 	json.NewDecoder(apiGet.Body).Decode(&app)
 	switch string(app.Result.Status) {
 	case "admin":
-		Kick(*_chid, *_uid)
+		kick(*_chid, *_uid)
 	case "creator":
-		Kick(*_chid, *_uid)
+		kick(*_chid, *_uid)
 	default:
 	}
 }
@@ -82,7 +82,7 @@ func main() {
 				json.NewDecoder(apiGet.Body).Decode(&app)
 				log.Print(app)
 				if app.Result.Status == "creator" {
-					Kick(chid, ban_id)
+					kick(chid, ban_id)
 				}
 
 			case "stable":
