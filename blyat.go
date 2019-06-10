@@ -8,14 +8,18 @@ import (
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
-type User struct {
-	status string
-}
-type Result struct {
-	user User
-}
 type kek struct {
-	result Result
+	Ok     bool `json:"ok"`
+	Result struct {
+		User struct {
+			ID           int    `json:"id"`
+			IsBot        bool   `json:"is_bot"`
+			FirstName    string `json:"first_name"`
+			Username     string `json:"username"`
+			LanguageCode string `json:"language_code"`
+		} `json:"user"`
+		Status string `json:"status"`
+	} `json:"result"`
 }
 
 func Kick(chatid int64, userid int) {
@@ -31,7 +35,7 @@ func adminCheck(_chid *int64, _uid *int, _token *string) {
 	var app = kek{}
 	//var api map[string]interface{}
 	json.NewDecoder(apiGet.Body).Decode(&app)
-	switch string(app.result.user.status) {
+	switch string(app.Result.Status) {
 	case "admin":
 		Kick(*_chid, *_uid)
 	case "creator":
@@ -72,7 +76,7 @@ func main() {
 				var app = kek{}
 				//var api map[string]interface{}
 				json.NewDecoder(apiGet.Body).Decode(&app)
-				switch string(app.result.user.status) {
+				switch string(app.Result.Status) {
 				case "administrator":
 					Kick(chid, uid)
 				case "creator":
