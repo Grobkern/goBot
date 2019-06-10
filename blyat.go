@@ -85,9 +85,9 @@ func main() {
 				log.Print(app)
 				switch app.Result.Status {
 				case "creator":
-					kick(chid, banId)
+					kick(chid, banID)
 				case "administrator":
-					kick(chid, banId)
+					kick(chid, banID)
 				default:
 					msg.Text = "No no no "
 				}
