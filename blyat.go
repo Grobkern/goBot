@@ -64,7 +64,8 @@ func main() {
 				userID = update.Message.From.ID
 				checkAdmin(&strchatID, &struserID, &chatID, &userID, &replyID)
 			case "ping":
-				msg.Text = "Заебал"
+				message := tgbotapi.NewMessage(update.Message.Chat.ID, "Fuck you")
+				bot.Send(message)
 			case "savestab":
 				stableID = update.Message.MessageID
 				chatID = update.Message.Chat.ID
