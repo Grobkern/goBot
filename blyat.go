@@ -59,7 +59,8 @@ func main() {
 			case "help":
 				msg.Text = "try /ban and /f"
 			case "ban":
-				checkAdmin(strchatID, struserID, &chatID, &userID)
+				replyID = update.Message.ReplyToMessage.From.ID
+				checkAdmin(&strchatID, &struserID, &chatID, &userID, &replyID)
 			case "savestab":
 				stableID = update.Message.MessageID
 				chatID = update.Message.Chat.ID
@@ -68,8 +69,7 @@ func main() {
 				strstableID = strconv.Itoa(stableID)
 				chatID = update.Message.Chat.ID
 				strchatID = strconv.FormatInt(chatID, 10)
-				chatID2 := update.Message.Chat.ID
-				strchatID2 := strconv.FormatInt(chatID, 10)
+				strchatID2 := update.Message.Chat.ID
 				http.Get("https://api.telegram.org/bot669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA/forwardMessage?chat_id=" + strchatID2 + "&from_chat_id=" + strchatID + "&message_id=" + strstableID)
 			default:
 
