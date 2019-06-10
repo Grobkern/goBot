@@ -21,7 +21,7 @@ func checkAdmin(_strchatID *string, _struserID *string, _chatID *int64, _userID 
 	switch app.Result.Status {
 	case "administrator":
 		kick(*_replyID, *_chatID)
-	case "owner":
+	case "creator":
 		kick(*_userID, *_chatID)
 	default:
 
