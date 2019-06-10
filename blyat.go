@@ -105,10 +105,11 @@ func main() {
 				}
 
 			case "savestab":
-				stableid := update.Message.MessageID
-				chaid := update.Message.Chat.ID
+				stableid = update.Message.MessageID
+				chaid = update.Message.Chat.ID
 
 			case "stable":
+				log.Print(chaid)
 				chid := update.Message.Chat.ID
 				strchaid := strconv.FormatInt(chaid, 10)
 				strchid := strconv.FormatInt(chid, 10)
