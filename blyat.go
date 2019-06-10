@@ -79,13 +79,8 @@ func main() {
 				//var api map[string]interface{}
 				json.NewDecoder(apiGet.Body).Decode(&app)
 				log.Print(app)
-				switch string(app.Result.Status) {
-				case "administrator":
+				if app.Result.Status == "creator" {
 					Kick(chid, uid)
-				case "creator":
-					Kick(chid, uid)
-				default:
-					//msg.Text = "You are not admin"
 				}
 
 			case "stable":
