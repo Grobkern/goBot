@@ -60,6 +60,8 @@ func main() {
 				msg.Text = "try /ban and /f"
 			case "ban":
 				replyID = update.Message.ReplyToMessage.From.ID
+				chatID = update.Message.Chat.ID
+				userID = update.Message.From.ID
 				checkAdmin(&strchatID, &struserID, &chatID, &userID, &replyID)
 			case "savestab":
 				stableID = update.Message.MessageID
