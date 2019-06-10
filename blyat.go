@@ -24,9 +24,10 @@ type kek struct {
 
 func kick(chatid int64, userid int) {
 	token := "669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA"
+	log.Print(userid)
 	usid := string(userid)
 	log.Print(usid)
-	http.Get("https://api.telegram.org/bot" + token + "/kickChatMember?chat_id=@grobkernux&user_id=869107364")
+	http.Get("https://api.telegram.org/bot669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA/kickChatMember?chat_id=@grobkernux&user_id=" + usid)
 	//http.Get("https://api.telegram.org/bot" + token + "/kickChatMember?chat_id=@grobkernux&user_id=" + usid)
 }
 func adminCheck(_chid *int64, _uid *int, _token *string) {
@@ -70,7 +71,7 @@ func main() {
 			case "ban":
 				chid := update.Message.Chat.ID
 				//uid := update.Message.From.ID
-				ban_id := update.Message.ReplyToMessage.From.ID
+				banID := update.Message.ReplyToMessage.From.ID
 				//uidString := string(uid)
 				apiGet, err := http.Get("https://api.telegram.org/bot669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA/getChatMember?chat_id=@grobkernux&user_id=404334300")
 				//apiGet, err := http.Get("https://api.telegram.org/bot" + token + "/getChatMember?chat_id=@grobkernux&user_id=" + uidString)
@@ -82,8 +83,13 @@ func main() {
 				//var api map[string]interface{}
 				json.NewDecoder(apiGet.Body).Decode(&app)
 				log.Print(app)
-				if app.Result.Status == "creator" {
-					kick(chid, ban_id)
+				switch app.Result.Status {
+				case "creator":
+					kick(chid, banId)
+				case "administrator":
+					kick(chid, banId)
+				default:
+					msg.Text = "No no no "
 				}
 
 			case "stable":
