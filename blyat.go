@@ -39,6 +39,7 @@ func main() {
 		stableID    int
 		strstableID string
 	)
+	var token string = "669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA"
 	bot, err := tgbotapi.NewBotAPI("669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA")
 	if err != nil {
 		log.Panic(err)
@@ -69,7 +70,10 @@ func main() {
 			case "savestab":
 				stableID = update.Message.MessageID
 				chatID = update.Message.Chat.ID
-
+			case "f":
+				chatID = update.Message.Chat.ID
+				strchatID = strconv.FormatInt(chatID, 10)
+				http.Get("https://api.telegram.org/bot" + token + "/sendSticker?chat_id=" + strchatID + "&sticker=CAADAgADsgADTptkAm1WnTBWvUfiAg")
 			case "stable":
 				strstableID = strconv.Itoa(stableID)
 				chatID = update.Message.Chat.ID
