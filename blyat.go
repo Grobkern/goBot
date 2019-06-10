@@ -33,7 +33,7 @@ func main() {
 		log.Panic(err)
 	}
 	bot.Debug = true
-	log.Printf("Pizdec.Fuckin'g golang nahui %s", bot.Self.UserName)
+	log.Printf("Connection complete %s", bot.Self.UserName)
 	u := tgbotapi.NewUpdate(0)
 	u.Timeout = 60
 	updates, err := bot.GetUpdatesChan(u)
@@ -64,7 +64,7 @@ func main() {
 				}
 				var api map[string]interface{}
 				json.NewDecoder(api_get.Body).Decode(&api)
-				if api != nil {
+				if api != nil && api_get != nil {
 					state := api["result"].(map[string]string)
 					state_string := state["status"]
 					switch string(state_string) {
@@ -80,7 +80,7 @@ func main() {
 			case "stable":
 			//	uid := update.Message.From.ID
 			//	roll := tgbotapi.ChatMember{tgbotapi.User{update.Message.From.ID, update.Message.From.FirstName}, update.Message.From.ID}.IsAdministrator()
-
+			case "dev":
 			default:
 				msg.Text = "I don't know that command"
 			}
