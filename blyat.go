@@ -63,6 +63,8 @@ func main() {
 				chatID = update.Message.Chat.ID
 				userID = update.Message.From.ID
 				checkAdmin(&strchatID, &struserID, &chatID, &userID, &replyID)
+			case "ping":
+				msg.Text = "Заебал"
 			case "savestab":
 				stableID = update.Message.MessageID
 				chatID = update.Message.Chat.ID
