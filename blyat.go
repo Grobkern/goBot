@@ -8,8 +8,11 @@ import (
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
-type Result struct {
+type User struct {
 	status string
+}
+type Result struct {
+	user User
 }
 type kek struct {
 	result Result
@@ -28,7 +31,7 @@ func adminCheck(_chid *int64, _uid *int, _token *string) {
 	var app = kek{}
 	//var api map[string]interface{}
 	json.NewDecoder(apiGet.Body).Decode(&app)
-	switch string(app.result.status) {
+	switch string(app.result.user.status) {
 	case "admin":
 		Kick(*_chid, *_uid)
 	case "creator":
