@@ -10,7 +10,9 @@ import (
 func checkAdmin(_strchatID *string, _struserID *string, _chatID *int64, _userID *int, _replyID *int) {
 	var token string = "669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA"
 	*_struserID = strconv.Itoa(*_userID)
+	log.Print(*_struserID)
 	*_strchatID = strconv.FormatInt(*_chatID, 10)
+	log.Print(*_strchatID)
 	apiGet, err := http.Get("https://api.telegram.org/bot" + token + "/getChatMember?chat_id=" + *_strchatID + "&user_id=" + *_struserID)
 	if err != nil {
 		log.Print(err)
