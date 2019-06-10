@@ -23,10 +23,11 @@ type kek struct {
 }
 
 func kick(chatid int64, userid int) {
-	token := "669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA"
+	//token := "669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA"
 	usid := string(userid)
 	log.Print(usid)
-	http.Get("https://api.telegram.org/bot" + token + "/kickChatMember?chat_id=@grobkernux&user_id=" + usid)
+	http.Get("https: //api.telegram.org/bot669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA/kickChatMember?chat_id=@grobkernux&user_id=869107364")
+	//http.Get("https://api.telegram.org/bot" + token + "/kickChatMember?chat_id=@grobkernux&user_id=" + usid)
 }
 func adminCheck(_chid *int64, _uid *int, _token *string) {
 	apiGet, err := http.Get("https://api.telegram.org/bot" + *_token + "/getChatMember?chat_id=@grobkernux&user_id" + string(*_uid))
