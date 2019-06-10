@@ -9,6 +9,13 @@ import (
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
+type Result struct {
+	status string "json:'status'"
+}
+type kek struct {
+	result Result
+}
+
 func Kick(chatid int64, userid int) {
 	//bot, err := tgbotapi.NewBotAPI("669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA")
 	token := "669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA"
@@ -62,19 +69,16 @@ func main() {
 				if err != nil {
 					log.Println(err)
 				}
-				var api map[string]interface{}
-				json.NewDecoder(api_get.Body).Decode(&api)
-				if api != nil && api_get != nil {
-					state := api["result"].(map[string]string)
-					state_string := state["status"]
-					switch string(state_string) {
-					case "admin":
-						Kick(chid, uid)
-					case "creator":
-						Kick(chid, uid)
-					default:
-						msg.Text = "You are not admin"
-					}
+				var app = kek{}
+				//var api map[string]interface{}
+				json.NewDecoder(api_get.Body).Decode(&app)
+				switch string(app.result.status) {
+				case "admin":
+					Kick(chid, uid)
+				case "creator":
+					Kick(chid, uid)
+				default:
+					msg.Text = "You are not admin"
 				}
 
 			case "stable":
