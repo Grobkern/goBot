@@ -9,7 +9,7 @@ import (
 )
 
 type Result struct {
-	status string "json:'status'"
+	status string
 }
 type kek struct {
 	result Result
