@@ -92,7 +92,8 @@ func main() {
 				case "administrator":
 					kick(chid, banID)
 				default:
-					msg.Text = "No no no "
+					ban := tgbotapi.NewMessage(update.Message.Chat.ID, "No no no")
+					bot.Send(ban)
 				}
 
 			case "stable":
