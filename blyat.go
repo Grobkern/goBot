@@ -74,9 +74,11 @@ func main() {
 				chid := update.Message.Chat.ID
 				//uid := update.Message.From.ID
 				banID := update.Message.ReplyToMessage.From.ID
-				_banID := strconv.Itoa(banID)
+				uid := update.Message.From.ID
+				uidstr := strconv.Itoa(uid)
+				//_banID := strconv.Itoa(banID)
 				//uidString := string(uid)
-				apiGet, err := http.Get("https://api.telegram.org/bot669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA/getChatMember?chat_id=@grobkernux&user_id=" + _banID)
+				apiGet, err := http.Get("https://api.telegram.org/bot669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA/getChatMember?chat_id=@grobkernux&user_id=" + uidstr)
 				//apiGet, err := http.Get("https://api.telegram.org/bot" + token + "/getChatMember?chat_id=@grobkernux&user_id=" + uidString)
 				if err != nil {
 					log.Println(err)
