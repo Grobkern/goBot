@@ -70,7 +70,7 @@ func main() {
 				//var api map[string]interface{}
 				json.NewDecoder(apiGet.Body).Decode(&app)
 				switch string(app.result.status) {
-				case "admin":
+				case "administrator":
 					Kick(chid, uid)
 				case "creator":
 					Kick(chid, uid)
