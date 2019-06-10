@@ -24,8 +24,8 @@ type kek struct {
 
 func main() {
 	var (
-		replyID    int
-		strreplyID string
+		replyID int
+		//strreplyID string
 	)
 	var (
 		chatID    int64
@@ -69,7 +69,8 @@ func main() {
 				strstableID = strconv.Itoa(stableID)
 				chatID = update.Message.Chat.ID
 				strchatID = strconv.FormatInt(chatID, 10)
-				strchatID2 := update.Message.Chat.ID
+				chatID2 := update.Message.Chat.ID
+				strchatID2 := strconv.FormatInt(chatID2, 10)
 				http.Get("https://api.telegram.org/bot669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA/forwardMessage?chat_id=" + strchatID2 + "&from_chat_id=" + strchatID + "&message_id=" + strstableID)
 			default:
 
