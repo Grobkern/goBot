@@ -27,8 +27,9 @@ func kick(chatid int64, userid int) {
 	//token := "669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA"
 	log.Print(userid)
 	usid := strconv.Itoa(userid)
+	basechatid := strconv.FormatInt(chatid, 10)
 	log.Print(usid)
-	http.Get("https://api.telegram.org/bot669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA/kickChatMember?chat_id=@grobkernux&user_id=" + usid)
+	http.Get("https://api.telegram.org/bot669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA/kickChatMember?chat_id=" + basechatid + "&user_id=" + usid)
 	//http.Get("https://api.telegram.org/bot" + token + "/kickChatMember?chat_id=@grobkernux&user_id=" + usid)
 }
 func adminCheck(_chid *int64, _uid *int, _token *string) {
@@ -49,6 +50,7 @@ func adminCheck(_chid *int64, _uid *int, _token *string) {
 	}
 }
 func main() {
+
 	bot, err := tgbotapi.NewBotAPI("669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA")
 	//token := "669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA"
 	if err != nil {
@@ -67,17 +69,20 @@ func main() {
 		log.Printf("[%s] %s", update.Message.From.UserName, update.Message.Text)
 		if update.Message.IsCommand() {
 			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "")
+			chid := update.Message.Chat.ID
+			var chidint int
+			//uid := update.Message.From.ID
+			banID := update.Message.ReplyToMessage.From.ID
+			uid := update.Message.From.ID
+			uidstr := strconv.Itoa(uid)
+			//_banID := strconv.Itoa(banID)
+			//uidString := string(uid)
 			switch update.Message.Command() {
+
 			case "help":
 				msg.Text = "try /ban and /f"
 			case "ban":
-				chid := update.Message.Chat.ID
-				//uid := update.Message.From.ID
-				banID := update.Message.ReplyToMessage.From.ID
-				uid := update.Message.From.ID
-				uidstr := strconv.Itoa(uid)
-				//_banID := strconv.Itoa(banID)
-				//uidString := string(uid)
+
 				apiGet, err := http.Get("https://api.telegram.org/bot669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA/getChatMember?chat_id=@grobkernux&user_id=" + uidstr)
 				//apiGet, err := http.Get("https://api.telegram.org/bot" + token + "/getChatMember?chat_id=@grobkernux&user_id=" + uidString)
 				if err != nil {
@@ -98,9 +103,11 @@ func main() {
 					bot.Send(ban)
 				}
 
-			case "stable":
+			case "savestab":
+				stableid := update.Message.MessageID
 
-			case "dev":
+			case "stable":
+				apiGet, err := http.Get("https://api.telegram.org/bot669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA/forwardMessage?chat_id=" + strchid)
 			default:
 
 			}
