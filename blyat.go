@@ -50,7 +50,8 @@ func adminCheck(_chid *int64, _uid *int, _token *string) {
 	}
 }
 func main() {
-
+	var chaid int64
+	var stableid int
 	bot, err := tgbotapi.NewBotAPI("669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA")
 	//token := "669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA"
 	if err != nil {
@@ -70,7 +71,7 @@ func main() {
 		if update.Message.IsCommand() {
 			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "")
 			chid := update.Message.Chat.ID
-			var chidint int
+
 			//uid := update.Message.From.ID
 			banID := update.Message.ReplyToMessage.From.ID
 			uid := update.Message.From.ID
@@ -105,9 +106,13 @@ func main() {
 
 			case "savestab":
 				stableid := update.Message.MessageID
+				chaid := update.Message.Chat.ID
 
 			case "stable":
-				apiGet, err := http.Get("https://api.telegram.org/bot669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA/forwardMessage?chat_id=" + strchid)
+				chid := update.Message.Chat.ID
+				strchaid := strconv.FormatInt(chaid, 10)
+				strchid := strconv.FormatInt(chid, 10)
+				http.Get("https://api.telegram.org/bot669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA/forwardMessage?chat_id=" + strchid + "&from_chat_id=" + strchaid + "&message_id=" + strchid)
 			default:
 
 			}
