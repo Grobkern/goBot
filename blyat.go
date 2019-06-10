@@ -44,6 +44,7 @@ func adminCheck(_chid *int64, _uid *int, _token *string) {
 	case "creator":
 		kick(*_chid, *_uid)
 	default:
+		//msg.Text = "lel"
 	}
 }
 func main() {
