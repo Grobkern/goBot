@@ -90,7 +90,8 @@ func main() {
 				}
 				msg.Text = "You are gay with chance:" + strconv.Itoa(gayRand) + "%"
 				counter++
-
+			case "Фоксед":
+				msg.Text = "http://qiwi.me/f0x1d"
 			case "stable":
 				strstableID = strconv.Itoa(stableID)
 				chatID = update.Message.Chat.ID
