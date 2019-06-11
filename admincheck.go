@@ -14,9 +14,7 @@ func checkAdmin(_strchatID *string, _struserID *string, _chatID *int64, _userID 
 	*_strchatID = strconv.FormatInt(*_chatID, 10)
 	log.Print(*_strchatID)
 	apiGet, err := http.Get("https://api.telegram.org/bot" + token + "/getChatMember?chat_id=" + *_strchatID + "&user_id=" + *_struserID)
-	if err != nil {
-		log.Print(err)
-	}
+	errcheck(&err)
 	var app = kek{}
 	json.NewDecoder(apiGet.Body).Decode(&app)
 	switch app.Result.Status {

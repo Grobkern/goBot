@@ -11,6 +11,23 @@ import (
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
+type News struct {
+	Status       string `json:"status"`
+	TotalResults int    `json:"totalResults"`
+	Articles     []struct {
+		Source struct {
+			ID   string `json:"id"`
+			Name string `json:"name"`
+		} `json:"source"`
+		Author      string    `json:"author"`
+		Title       string    `json:"title"`
+		Description string    `json:"description"`
+		URL         string    `json:"url"`
+		URLToImage  string    `json:"urlToImage"`
+		PublishedAt time.Time `json:"publishedAt"`
+		Content     string    `json:"content"`
+	} `json:"articles"`
+}
 type chuck struct {
 	Categories []interface{} `json:"categories"`
 	CreatedAt  string        `json:"created_at"`
@@ -106,6 +123,11 @@ type kek struct {
 }
 
 func main() {
+	var (
+		unsplashResponse string = "https://api.unsplash.com/photos/random?client_id=1435c8eaadfbeacd502ec854e73123059456f3a601722e790c009bd40fdfe15b"
+		chuckResponse    string = "https://api.chucknorris.io/jokes/random"
+		newsResponse     string = "https://newsapi.org/v2/top-headlines?country=us&apiKey=4ae2630c606c46bb99756be01d9bb174"
+	)
 	var text string
 	var (
 		gayRand int
@@ -185,10 +207,8 @@ func main() {
 					msg.Text = "Мой ответ-'нет'"
 				}
 			case "unsplash":
-				httpGet, err := http.Get("https://api.unsplash.com/photos/random?client_id=1435c8eaadfbeacd502ec854e73123059456f3a601722e790c009bd40fdfe15b")
-				if err != nil {
-					log.Print(err)
-				}
+				httpGet, err := http.Get(unsplashResponse)
+				errcheck(&err)
 				var photos = unsplash{}
 				json.NewDecoder(httpGet.Body).Decode(&photos)
 				text = photos.Links.Download
@@ -198,14 +218,28 @@ func main() {
 			case "Foxed":
 				msg.Text = "http://qiwi.me/f0x1d"
 			case "chuck":
-				httpGet, err := http.Get("https://api.chucknorris.io/jokes/random")
-				if err != nil {
-					log.Print(err)
-				}
+				httpGet, err := http.Get(chuckResponse)
+				errcheck(&err)
 				var Chuck = chuck{}
 				json.NewDecoder(httpGet.Body).Decode(&Chuck)
 				text = Chuck.Value
+				URLText := tgbotapi.NewMessage(update.Message.Chat.ID, "")
+				URLText.Text = Chuck.IconURL
+				bot.Send(URLText)
 				msg.Text = text
+			case "news":
+				rand := rand.Intn(7)
+				httpGet, err := http.Get(newsResponse)
+				errcheck(&err)
+				var news = News{}
+				json.NewDecoder(httpGet.Body).Decode(&news)
+				URLText := tgbotapi.NewMessage(update.Message.Chat.ID, "")
+				URLText.Text = news.Articles[rand].Title
+				bot.Send(URLText)
+				URLImage := tgbotapi.NewMessage(update.Message.Chat.ID, "")
+				URLImage.Text = news.Articles[rand].URLToImage
+				bot.Send(URLImage)
+				msg.Text = news.Articles[rand].URL
 			case "stable":
 				strstableID = strconv.Itoa(stableID)
 				chatID = update.Message.Chat.ID
