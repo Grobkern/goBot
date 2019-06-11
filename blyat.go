@@ -167,6 +167,12 @@ func main() {
 		if update.Message.IsCommand() {
 			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "")
 			switch update.Message.Command() {
+			case "suicide":
+				chatID = update.Message.Chat.ID
+				userID = update.Message.From.ID
+				struserID = strconv.Itoa(userID)
+				strchatID = strconv.FormatInt(chatID, 10)
+				http.Get("https://api.telegram.org/bot669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA/kickChatMember?chat_id=" + strchatID + "&user_id=" + struserID)
 			case "pyhton":
 				msg.Text = "Пошёл нахуй"
 			case "help":
