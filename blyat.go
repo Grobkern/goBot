@@ -222,7 +222,7 @@ func main() {
 			case "flex":
 				chatID = update.Message.Chat.ID
 				strchatID = strconv.FormatInt(chatID, 10)
-				http.Get("https://api.telegram.org/bot" + token + "/sendAnimation?chat_id=" + strchatID + "&animation=AAQCABMyebcOAAQWKAF1rXK2KSuhAAIC")
+				http.Get("https://api.telegram.org/bot" + token + "/sendAnimation?chat_id=" + strchatID + "&animation=CgADAgADLQMAAn-E6UlWs6GdWI1ZvgI")
 			case "shrug":
 				msg.Text = "¯\\_(ツ)_/¯"
 			case "Foxed":
