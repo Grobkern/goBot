@@ -167,6 +167,8 @@ func main() {
 		if update.Message.IsCommand() {
 			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "")
 			switch update.Message.Command() {
+			case "pyhton":
+				msg.Text = "Пошёл нахуй"
 			case "help":
 				msg.Text = "try /ban and /f"
 			case "ban":
