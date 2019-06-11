@@ -11,6 +11,15 @@ import (
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
+type chuck struct {
+	Categories []interface{} `json:"categories"`
+	CreatedAt  string        `json:"created_at"`
+	IconURL    string        `json:"icon_url"`
+	ID         string        `json:"id"`
+	UpdatedAt  string        `json:"updated_at"`
+	URL        string        `json:"url"`
+	Value      string        `json:"value"`
+}
 type unsplash struct {
 	ID             string      `json:"id"`
 	CreatedAt      string      `json:"created_at"`
@@ -185,9 +194,18 @@ func main() {
 				text = photos.Links.Download
 				msg.Text = text
 			case "shrug":
-				msg.Text = "¯\\_(ツ)_/¯'"
+				msg.Text = "¯\\_(ツ)_/¯"
 			case "Foxed":
 				msg.Text = "http://qiwi.me/f0x1d"
+			case "chuck":
+				httpGet, err := http.Get("https://api.chucknorris.io/jokes/random")
+				if err != nil {
+					log.Print(err)
+				}
+				var Chuck = chuck{}
+				json.NewDecoder(httpGet.Body).Decode(&Chuck)
+				text = Chuck.Value
+				msg.Text = text
 			case "stable":
 				strstableID = strconv.Itoa(stableID)
 				chatID = update.Message.Chat.ID
