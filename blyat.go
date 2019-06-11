@@ -207,12 +207,18 @@ func main() {
 					msg.Text = "Мой ответ-'нет'"
 				}
 			case "unsplash":
-				httpGet, err := http.Get(unsplashResponse)
-				errcheck(&err)
-				var photos = unsplash{}
-				json.NewDecoder(httpGet.Body).Decode(&photos)
-				text = photos.Links.Download
-				msg.Text = text
+				userID = update.Message.From.ID
+				if userID == 847529348 {
+					msg.Text = "Suck"
+				} else {
+
+					httpGet, err := http.Get(unsplashResponse)
+					errcheck(&err)
+					var photos = unsplash{}
+					json.NewDecoder(httpGet.Body).Decode(&photos)
+					text = photos.Links.Download
+					msg.Text = text
+				}
 			case "shrug":
 				msg.Text = "¯\\_(ツ)_/¯"
 			case "Foxed":
