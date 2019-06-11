@@ -220,6 +220,9 @@ func main() {
 					msg.Text = text
 				}
 			case "flex":
+				chatID = update.Message.Chat.ID
+				strchatID = strconv.FormatInt(chatID, 10)
+				http.Get("https://api.telegram.org/bot" + token + "/sendAnimation?chat_id=" + strchatID + "&animation=AAQCABMyebcOAAQWKAF1rXK2KSuhAAIC")
 			case "shrug":
 				msg.Text = "¯\\_(ツ)_/¯"
 			case "Foxed":
@@ -252,7 +255,7 @@ func main() {
 				strchatID2 := strconv.FormatInt(chatID2, 10)
 				http.Get("https://api.telegram.org/bot669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA/forwardMessage?chat_id=" + strchatID2 + "&from_chat_id=" + strchatID + "&message_id=" + strstableID)
 			case "info":
-				msg.Text = "Author:@Kernux\nBuild:Developer\nServer:@F0x3d\nHello World:Hello,World!"
+				msg.Text = "Author:@Kernux\nBuild:Development\nServer:@F0x3d\nHello World:Hello,World!"
 			default:
 
 			}
