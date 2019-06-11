@@ -126,7 +126,7 @@ func main() {
 	var (
 		unsplashResponse string = "https://api.unsplash.com/photos/random?client_id=1435c8eaadfbeacd502ec854e73123059456f3a601722e790c009bd40fdfe15b"
 		chuckResponse    string = "https://api.chucknorris.io/jokes/random"
-		newsResponse     string = "https://newsapi.org/v2/top-headlines?country=us&apiKey=4ae2630c606c46bb99756be01d9bb174"
+		newsResponse     string = "https://newsapi.org/v2/top-headlines?country=ru&apiKey=4ae2630c606c46bb99756be01d9bb174"
 	)
 	var text string
 	var (
@@ -236,9 +236,6 @@ func main() {
 				URLText := tgbotapi.NewMessage(update.Message.Chat.ID, "")
 				URLText.Text = news.Articles[rand].Title
 				bot.Send(URLText)
-				URLImage := tgbotapi.NewMessage(update.Message.Chat.ID, "")
-				URLImage.Text = news.Articles[rand].URLToImage
-				bot.Send(URLImage)
 				msg.Text = news.Articles[rand].URL
 			case "stable":
 				strstableID = strconv.Itoa(stableID)
