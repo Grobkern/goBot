@@ -219,6 +219,7 @@ func main() {
 					text = photos.Links.Download
 					msg.Text = text
 				}
+			case "flex":
 			case "shrug":
 				msg.Text = "¯\\_(ツ)_/¯"
 			case "Foxed":
