@@ -352,7 +352,7 @@ func main() {
 				errcheck(&err)
 				var news = news{}
 				json.NewDecoder(httpGet.Body).Decode(&news)
-				msg.Text = news.Articles[random].Title + "\n" + news.Articles[random].URL
+				msg.Text = news.Articles[random].Title + "\n" + "\n" + news.Articles[random].URL
 			case "stable":
 				strstableID = strconv.Itoa(stableID)
 				chatID = update.Message.Chat.ID
