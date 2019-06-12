@@ -125,6 +125,9 @@ type kek struct {
 	} `json:"result"`
 }
 
+func nilek(replyIDPointer *int) {
+	return
+}
 func main() {
 	var (
 		unsplashResponse string = "https://api.unsplash.com/photos/random?client_id=1435c8eaadfbeacd502ec854e73123059456f3a601722e790c009bd40fdfe15b"
@@ -183,7 +186,7 @@ func main() {
 			case "ban":
 				var nlip *int = &update.Message.ReplyToMessage.From.ID
 				log.Print(replyID)
-				if update.Message.Text != "Lol" && nlip != nil {
+				if update.Message.Text != "Lol" && &nlip != nil {
 
 					chatID = update.Message.Chat.ID
 					userID = update.Message.From.ID
