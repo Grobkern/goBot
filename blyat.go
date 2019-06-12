@@ -321,7 +321,7 @@ func main() {
 				errcheck(&err)
 				var mus = music{}
 				json.NewDecoder(httpGet.Body).Decode(&mus)
-				msg.Text = mus.Cover + mus.Link
+				msg.Text = mus.Cover + "\n" + mus.Link
 			case "flex":
 				chatID = update.Message.Chat.ID
 				strchatID = strconv.FormatInt(chatID, 10)
