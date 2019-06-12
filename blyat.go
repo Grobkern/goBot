@@ -178,10 +178,15 @@ func main() {
 			case "help":
 				msg.Text = "try /ban and /f"
 			case "ban":
-				replyID = update.Message.ReplyToMessage.From.ID
-				chatID = update.Message.Chat.ID
-				userID = update.Message.From.ID
-				checkAdmin(&strchatID, &struserID, &chatID, &userID, &replyID)
+				if update.Message.Text != "Lol" {
+
+					replyID = update.Message.ReplyToMessage.From.ID
+					chatID = update.Message.Chat.ID
+					userID = update.Message.From.ID
+					checkAdmin(&strchatID, &struserID, &chatID, &userID, &replyID)
+				} else {
+					msg.Text = "ALARM . I CAN'T BAN ANYTHING"
+				}
 			case "ping":
 				message := tgbotapi.NewMessage(update.Message.Chat.ID, "Fuck you")
 				bot.Send(message)
