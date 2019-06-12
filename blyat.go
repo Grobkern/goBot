@@ -184,10 +184,7 @@ func main() {
 			case "help":
 				msg.Text = "try /ban and /f"
 			case "ban":
-				var nlip *int = &update.Message.ReplyToMessage.From.ID
-				log.Print(replyID)
-				if update.Message.Text != "Lol" && &nlip != nil {
-
+				if update.Message.ReplyToMessage != nil {
 					chatID = update.Message.Chat.ID
 					userID = update.Message.From.ID
 					checkAdmin(&strchatID, &struserID, &chatID, &userID, &replyID)
