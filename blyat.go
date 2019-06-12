@@ -245,6 +245,9 @@ func main() {
 				http.Get("https://api.telegram.org/bot" + token + "/sendAnimation?chat_id=" + strchatID + "&animation=CgADAgADLQMAAn-E6UlWs6GdWI1ZvgI")
 			case "shrug":
 				msg.Text = "¯\\_(ツ)_/¯"
+			case "fix":
+				replyID = update.Message.ReplyToMessage.From.ID
+				msg.Text = strconv.Itoa(replyID)
 			case "Foxed":
 				msg.Text = "http://qiwi.me/f0x1d"
 			case "chuck":
