@@ -246,7 +246,7 @@ func main() {
 			case "shrug":
 				msg.Text = "¯\\_(ツ)_/¯"
 			case "fix":
-				if &update.Message.ReplyToMessage.From.ID != nil {
+				if &update.Message.ReplyToMessage != nil {
 					replyID = update.Message.ReplyToMessage.From.ID
 					msg.Text = strconv.Itoa(replyID)
 				}
