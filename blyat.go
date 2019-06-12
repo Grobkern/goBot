@@ -189,7 +189,7 @@ func main() {
 					userID = update.Message.From.ID
 					checkAdmin(&strchatID, &struserID, &chatID, &userID, &replyID)
 				} else {
-					msg.Text = "ALARM . I CAN'T BAN NOTHING"
+					msg.Text = "Лежать + лежать.Лежать + сосать.Меня теперь не сломать"
 				}
 			case "ping":
 				message := tgbotapi.NewMessage(update.Message.Chat.ID, "Fuck you")
