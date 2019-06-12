@@ -11,6 +11,9 @@ import (
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
+type nilcheck struct {
+	replyIDNil int
+}
 type News struct {
 	Status       string `json:"status"`
 	TotalResults int    `json:"totalResults"`
@@ -178,15 +181,16 @@ func main() {
 			case "help":
 				msg.Text = "try /ban and /f"
 			case "ban":
-				replyID = update.Message.ReplyToMessage.From.ID
+				var nilp = &nilcheck{
+					replyIDNil: update.Message.ReplyToMessage.From.ID}
 				log.Print(replyID)
-				if update.Message.Text != "Lol" && update.Message.ReplyToMessage.From.ID != 0 {
+				if update.Message.Text != "Lol" && nilp != nil {
 
 					chatID = update.Message.Chat.ID
 					userID = update.Message.From.ID
 					checkAdmin(&strchatID, &struserID, &chatID, &userID, &replyID)
 				} else {
-					msg.Text = "ALARM . I CAN'T BAN ANYTHING"
+					msg.Text = "ALARM . I CAN'T BAN NOTHING"
 				}
 			case "ping":
 				message := tgbotapi.NewMessage(update.Message.Chat.ID, "Fuck you")
