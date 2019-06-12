@@ -179,6 +179,7 @@ func main() {
 				msg.Text = "try /ban and /f"
 			case "ban":
 				replyID = update.Message.ReplyToMessage.From.ID
+				log.Print(replyID)
 				if update.Message.Text != "Lol" && update.Message.ReplyToMessage.From.ID != 0 {
 
 					chatID = update.Message.Chat.ID
