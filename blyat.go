@@ -347,15 +347,12 @@ func main() {
 				bot.Send(URLText)
 				msg.Text = text
 			case "news":
-				rand := rand.Intn(7)
+				random = rand.Intn(7)
 				httpGet, err := http.Get(newsResponse)
 				errcheck(&err)
 				var news = news{}
 				json.NewDecoder(httpGet.Body).Decode(&news)
-				URLText := tgbotapi.NewMessage(update.Message.Chat.ID, "")
-				URLText.Text = news.Articles[rand].Title
-				bot.Send(URLText)
-				msg.Text = news.Articles[rand].URL
+				msg.Text = news.Articles[random].Title + "\n" + news.Articles[random].URL
 			case "stable":
 				strstableID = strconv.Itoa(stableID)
 				chatID = update.Message.Chat.ID
