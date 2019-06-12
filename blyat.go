@@ -367,7 +367,7 @@ func main() {
 				msg.Text = "Author:@Kernux\nBuild:Development\nServer:@F0x3d\nHello World:Hello,World!"
 			case "vlad":
 				random = rand.Intn(1132)
-				strrandom := strconv.Itoa(random)
+				//strrandom := strconv.Itoa(random)
 				chatID = update.Message.Chat.ID
 				strchatID = strconv.FormatInt(chatID, 10)
 				http.Get("https://api.telegram.org/bot669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA/forwardMessage?chat_id=" + strchatID + "&from_chat_id=@secondthunderdb&message_id=628") //+ strrandom)
