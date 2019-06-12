@@ -134,7 +134,7 @@ func main() {
 		counter int
 	)
 	var (
-		replyID int
+		replyID int = 0
 		//strreplyID string
 	)
 	var (
@@ -178,9 +178,9 @@ func main() {
 			case "help":
 				msg.Text = "try /ban and /f"
 			case "ban":
-				if update.Message.Text != "Lol" {
+				replyID = update.Message.ReplyToMessage.From.ID
+				if update.Message.Text != "Lol" && update.Message.ReplyToMessage.From.ID != 0 {
 
-					replyID = update.Message.ReplyToMessage.From.ID
 					chatID = update.Message.Chat.ID
 					userID = update.Message.From.ID
 					checkAdmin(&strchatID, &struserID, &chatID, &userID, &replyID)
