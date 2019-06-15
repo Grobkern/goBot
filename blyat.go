@@ -279,7 +279,7 @@ func main() {
 			case "music":
 				random = rand.Intn(300000-100000) + 100000
 				var strrandom = strconv.Itoa(random)
-				httpGet, err := http.Get("https://api.deezer.com/album/" + strrandom)
+				httpGet, err := http.Get("https://api.deezer.com/search?q=кис-кис")
 				mp3, er := os.Create("music.mp3")
 				errcheck(&er)
 				errcheck(&err)
