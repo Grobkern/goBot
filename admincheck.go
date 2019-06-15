@@ -8,7 +8,7 @@ import (
 )
 
 func checkAdmin(_strchatID *string, _struserID *string, _chatID *int64, _userID *int, _replyID *int) {
-	var token string = "669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA"
+	var token = "669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA"
 	*_struserID = strconv.Itoa(*_userID)
 	log.Print(*_struserID)
 	*_strchatID = strconv.FormatInt(*_chatID, 10)

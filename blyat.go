@@ -2,9 +2,11 @@ package main
 
 import (
 	"encoding/json"
+	"io"
 	"log"
 	"math/rand"
 	"net/http"
+	"os"
 	"strconv"
 	"time"
 
@@ -12,87 +14,46 @@ import (
 )
 
 type music struct {
-	ID          int    `json:"id"`
-	Title       string `json:"title"`
-	Upc         string `json:"upc"`
-	Link        string `json:"link"`
-	Share       string `json:"share"`
-	Cover       string `json:"cover"`
-	CoverSmall  string `json:"cover_small"`
-	CoverMedium string `json:"cover_medium"`
-	CoverBig    string `json:"cover_big"`
-	CoverXl     string `json:"cover_xl"`
-	GenreID     int    `json:"genre_id"`
-	Genres      struct {
-		Data []struct {
-			ID      int    `json:"id"`
-			Name    string `json:"name"`
-			Picture string `json:"picture"`
-			Type    string `json:"type"`
-		} `json:"data"`
-	} `json:"genres"`
-	Label                 string `json:"label"`
-	NbTracks              int    `json:"nb_tracks"`
-	Duration              int    `json:"duration"`
-	Fans                  int    `json:"fans"`
-	Rating                int    `json:"rating"`
-	ReleaseDate           string `json:"release_date"`
-	RecordType            string `json:"record_type"`
-	Available             bool   `json:"available"`
-	Tracklist             string `json:"tracklist"`
-	ExplicitLyrics        bool   `json:"explicit_lyrics"`
-	ExplicitContentLyrics int    `json:"explicit_content_lyrics"`
-	ExplicitContentCover  int    `json:"explicit_content_cover"`
-	Contributors          []struct {
-		ID            int    `json:"id"`
-		Name          string `json:"name"`
-		Link          string `json:"link"`
-		Share         string `json:"share"`
-		Picture       string `json:"picture"`
-		PictureSmall  string `json:"picture_small"`
-		PictureMedium string `json:"picture_medium"`
-		PictureBig    string `json:"picture_big"`
-		PictureXl     string `json:"picture_xl"`
-		Radio         bool   `json:"radio"`
-		Tracklist     string `json:"tracklist"`
-		Type          string `json:"type"`
-		Role          string `json:"role"`
-	} `json:"contributors"`
-	Artist struct {
-		ID            int    `json:"id"`
-		Name          string `json:"name"`
-		Picture       string `json:"picture"`
-		PictureSmall  string `json:"picture_small"`
-		PictureMedium string `json:"picture_medium"`
-		PictureBig    string `json:"picture_big"`
-		PictureXl     string `json:"picture_xl"`
-		Tracklist     string `json:"tracklist"`
-		Type          string `json:"type"`
-	} `json:"artist"`
-	Type   string `json:"type"`
-	Tracks struct {
-		Data []struct {
-			ID                    int    `json:"id"`
-			Readable              bool   `json:"readable"`
-			Title                 string `json:"title"`
-			TitleShort            string `json:"title_short"`
-			TitleVersion          string `json:"title_version"`
-			Link                  string `json:"link"`
-			Duration              int    `json:"duration"`
-			Rank                  int    `json:"rank"`
-			ExplicitLyrics        bool   `json:"explicit_lyrics"`
-			ExplicitContentLyrics int    `json:"explicit_content_lyrics"`
-			ExplicitContentCover  int    `json:"explicit_content_cover"`
-			Preview               string `json:"preview"`
-			Artist                struct {
-				ID        int    `json:"id"`
-				Name      string `json:"name"`
-				Tracklist string `json:"tracklist"`
-				Type      string `json:"type"`
-			} `json:"artist"`
-			Type string `json:"type"`
-		} `json:"data"`
-	} `json:"tracks"`
+	Data []struct {
+		ID                    int    `json:"id"`
+		Readable              bool   `json:"readable"`
+		Title                 string `json:"title"`
+		TitleShort            string `json:"title_short"`
+		TitleVersion          string `json:"title_version"`
+		Link                  string `json:"link"`
+		Duration              int    `json:"duration"`
+		Rank                  int    `json:"rank"`
+		ExplicitLyrics        bool   `json:"explicit_lyrics"`
+		ExplicitContentLyrics int    `json:"explicit_content_lyrics"`
+		ExplicitContentCover  int    `json:"explicit_content_cover"`
+		Preview               string `json:"preview"`
+		Artist                struct {
+			ID            int    `json:"id"`
+			Name          string `json:"name"`
+			Link          string `json:"link"`
+			Picture       string `json:"picture"`
+			PictureSmall  string `json:"picture_small"`
+			PictureMedium string `json:"picture_medium"`
+			PictureBig    string `json:"picture_big"`
+			PictureXl     string `json:"picture_xl"`
+			Tracklist     string `json:"tracklist"`
+			Type          string `json:"type"`
+		} `json:"artist"`
+		Album struct {
+			ID          int    `json:"id"`
+			Title       string `json:"title"`
+			Cover       string `json:"cover"`
+			CoverSmall  string `json:"cover_small"`
+			CoverMedium string `json:"cover_medium"`
+			CoverBig    string `json:"cover_big"`
+			CoverXl     string `json:"cover_xl"`
+			Tracklist   string `json:"tracklist"`
+			Type        string `json:"type"`
+		} `json:"album"`
+		Type string `json:"type"`
+	} `json:"data"`
+	Total int    `json:"total"`
+	Next  string `json:"next"`
 }
 
 type news struct {
@@ -208,9 +169,9 @@ type kek struct {
 
 func main() {
 	var (
-		unsplashResponse string = "https://api.unsplash.com/photos/random?client_id=1435c8eaadfbeacd502ec854e73123059456f3a601722e790c009bd40fdfe15b"
-		chuckResponse    string = "https://api.chucknorris.io/jokes/random"
-		newsResponse     string = "https://newsapi.org/v2/top-headlines?country=ru&apiKey=4ae2630c606c46bb99756be01d9bb174"
+		unsplashResponse = "https://api.unsplash.com/photos/random?client_id=1435c8eaadfbeacd502ec854e73123059456f3a601722e790c009bd40fdfe15b"
+		chuckResponse    = "https://api.chucknorris.io/jokes/random"
+		newsResponse     = "https://newsapi.org/v2/top-headlines?country=ru&apiKey=4ae2630c606c46bb99756be01d9bb174"
 	)
 	var text string
 	var (
@@ -233,7 +194,7 @@ func main() {
 		stableID    int
 		strstableID string
 	)
-	var token string = "669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA"
+	var token = "669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA"
 	bot, err := tgbotapi.NewBotAPI("669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA")
 	if err != nil {
 		log.Panic(err)
@@ -319,10 +280,15 @@ func main() {
 				random = rand.Intn(300000-100000) + 100000
 				var strrandom = strconv.Itoa(random)
 				httpGet, err := http.Get("https://api.deezer.com/album/" + strrandom)
+				mp3, er := os.Create("music.mp3")
+				errcheck(&er)
 				errcheck(&err)
 				var mus = music{}
 				json.NewDecoder(httpGet.Body).Decode(&mus)
-				msg.Text = mus.Cover + "\n" + mus.Link
+				out, ver := http.Get(mus.Data[random].Link)
+				errcheck(&ver)
+				_, errv := io.Copy(mp3, out.Body)
+				errcheck(&errv)
 			case "flex":
 				chatID = update.Message.Chat.ID
 				strchatID = strconv.FormatInt(chatID, 10)
@@ -352,7 +318,7 @@ func main() {
 				errcheck(&err)
 				var news = news{}
 				json.NewDecoder(httpGet.Body).Decode(&news)
-				msg.Text = news.Articles[random].Title + "\n" + "\n" + news.Articles[random].URL + "\n" + news.Articles[random].URLToImage
+				msg.Text = news.Articles[random].Title + "\n" + "\n" + news.Articles[random].URL + "\n"
 			case "stable":
 				strstableID = strconv.Itoa(stableID)
 				chatID = update.Message.Chat.ID
