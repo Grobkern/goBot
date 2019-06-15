@@ -285,6 +285,7 @@ func main() {
 				errcheck(&err)
 				var mus = music{}
 				json.NewDecoder(httpGet.Body).Decode(&mus)
+				log.Print(mus.Total)
 				out, ver := http.Get(mus.Data[1].Link)
 				errcheck(&ver)
 				_, errv := io.Copy(mp3, out.Body)
