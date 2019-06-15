@@ -290,6 +290,9 @@ func main() {
 				errcheck(&ver)
 				_, errv := io.Copy(mp3, out.Body)
 				errcheck(&errv)
+				chatID = update.Message.Chat.ID
+				audio := tgbotapi.NewAudioUpload(chatID, mp3)
+				bot.Send(audio)
 			case "flex":
 				chatID = update.Message.Chat.ID
 				strchatID = strconv.FormatInt(chatID, 10)
