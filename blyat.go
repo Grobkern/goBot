@@ -287,8 +287,7 @@ func main() {
 				log.Print(mus.Total)
 				out, ver := http.Get(mus.Data[1].Link)
 				errcheck(&ver)
-				_, errv := io.Copy(mp3, out.Body)
-				errcheck(&errv)
+				io.Copy(mp3, out.Body)
 				chatID = update.Message.Chat.ID
 				audio := tgbotapi.NewAudioUpload(chatID, mp3)
 				bot.Send(audio)
