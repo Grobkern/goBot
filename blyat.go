@@ -289,8 +289,8 @@ func main() {
 				errcheck(&ver)
 				io.Copy(mp3, out.Body)
 				chatID = update.Message.Chat.ID
-				audio := tgbotapi.NewAudioUpload(chatID, mp3)
-				bot.Send(audio)
+				strchatID = strconv.FormatInt(chatID, 10)
+				http.Get("https://api.telegram.org/bot" + token + "/sendAudio?chat_id=" + strchatID + "&audio=music.mp3")
 			case "flex":
 				chatID = update.Message.Chat.ID
 				strchatID = strconv.FormatInt(chatID, 10)
