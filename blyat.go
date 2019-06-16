@@ -173,7 +173,9 @@ func main() {
 		chuckResponse    = "https://api.chucknorris.io/jokes/random"
 		newsResponse     = "https://newsapi.org/v2/top-headlines?country=ru&apiKey=4ae2630c606c46bb99756be01d9bb174"
 	)
-	var text string
+	var (
+		text string
+	)
 	var (
 		random  int
 		counter int
