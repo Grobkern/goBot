@@ -177,8 +177,9 @@ func main() {
 		text string
 	)
 	var (
-		random  int
-		counter int
+		random    int
+		counter   int
+		strrandom string
 	)
 	var (
 		replyID int
@@ -322,6 +323,10 @@ func main() {
 				var news = news{}
 				json.NewDecoder(httpGet.Body).Decode(&news)
 				msg.Text = news.Articles[random].Title + "\n" + "\n" + news.Articles[random].URL + "\n"
+			case "random":
+				random = rand.Intn(32769)
+				strrandom = strconv.Itoa(random)
+				msg.Text = strrandom
 			case "stable":
 				strstableID = strconv.Itoa(stableID)
 				chatID = update.Message.Chat.ID
