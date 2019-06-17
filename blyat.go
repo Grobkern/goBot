@@ -254,15 +254,19 @@ func main() {
 					counter++
 				}
 			case "8":
-				random = rand.Intn(4)
+				random = rand.Intn(6)
 				switch random {
 				case 0:
 					msg.Text = "Мой ответ - 'да'"
 				case 1:
 					msg.Text = "Скорее всего да"
 				case 2:
-					msg.Text = "Скорее всего нет"
+					msg.Text = "хз"
 				case 3:
+					msg.Text = "Скорее всего нет"
+				case 4:
+					msg.Text = "Давай ещё раз"
+				case 5:
 					msg.Text = "Мой ответ-'нет'"
 				}
 			case "unsplash":
