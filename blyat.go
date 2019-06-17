@@ -219,7 +219,7 @@ func main() {
 				userID = update.Message.From.ID
 				struserID = strconv.Itoa(userID)
 				strchatID = strconv.FormatInt(chatID, 10)
-				http.Get("https://api.telegram.org/bot669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA/kickChatMember?chat_id=" + strchatID + "&user_id=" + struserID)
+				http.Get("https://api.telegram.org/bot" + token + "/kickChatMember?chat_id=" + strchatID + "&user_id=" + struserID)
 			case "pyhton":
 				msg.Text = "Пошёл нахуй"
 			case "help":
@@ -296,7 +296,7 @@ func main() {
 				io.Copy(mp3, out.Body)
 				chatID = update.Message.Chat.ID
 				strchatID = strconv.FormatInt(chatID, 10)
-				http.Get("https://api.telegram.org/bot669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA/sendAudio?chat_id=404334300&audio=music.mp3")
+				http.Get("https://api.telegram.org/bot" + token + "/sendAudio?chat_id=404334300&audio=music.mp3")
 			case "flex":
 				chatID = update.Message.Chat.ID
 				strchatID = strconv.FormatInt(chatID, 10)
@@ -337,7 +337,7 @@ func main() {
 				strchatID = strconv.FormatInt(chatID, 10)
 				chatID2 := update.Message.Chat.ID
 				strchatID2 := strconv.FormatInt(chatID2, 10)
-				http.Get("https://api.telegram.org/bot669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA/forwardMessage?chat_id=" + strchatID2 + "&from_chat_id=" + strchatID + "&message_id=" + strstableID)
+				http.Get("https://api.telegram.org/bot" + token + "/forwardMessage?chat_id=" + strchatID2 + "&from_chat_id=" + strchatID + "&message_id=" + strstableID)
 			case "productplacement":
 				msg.Text = "Привет, сегодня днем тут в чате у меня спрашивали про инстересную тему, которую я нашел, вот ссылка на нее - @Kernux(ссылка в ЛС)\n\nГлавное понять правильно как использовать выгодно инфу что там есть, у меня получилось ну очень прибыльно!)"
 			case "info":
