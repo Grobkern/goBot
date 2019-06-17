@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c8ef36e5-4cb2-4ced-a204-e312c2f55a03" name="Default Changelist" comment="" />
+    <list default="true" id="c8ef36e5-4cb2-4ced-a204-e312c2f55a03" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blyat.go" beforeDir="false" afterPath="$PROJECT_DIR$/blyat.go" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,11 +16,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/blyat.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="301">
-              <caret line="224" column="119" lean-forward="true" selection-start-line="224" selection-start-column="16" selection-end-line="224" selection-end-column="119" />
-              <folding>
-                <element signature="e#14#153#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="562">
+              <caret line="347" column="41" selection-start-line="347" selection-start-column="41" selection-end-line="347" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -98,7 +98,7 @@
     <frame x="-2" y="0" width="1924" height="1054" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18196371" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18623266" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -129,11 +129,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/blyat.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="224" column="119" lean-forward="true" selection-start-line="224" selection-start-column="16" selection-end-line="224" selection-end-column="119" />
-          <folding>
-            <element signature="e#14#153#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="562">
+          <caret line="347" column="41" selection-start-line="347" selection-start-column="41" selection-end-line="347" selection-end-column="41" />
         </state>
       </provider>
     </entry>

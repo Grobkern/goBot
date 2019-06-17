@@ -282,6 +282,8 @@ func main() {
 					text = photos.Links.Download
 					msg.Text = text
 				}
+			case "suck":
+				msg.Text = "Suck"
 			case "music":
 				random = rand.Intn(300000-100000) + 100000
 				httpGet, err := http.Get("https://api.deezer.com/search?q=queen")
@@ -343,7 +345,7 @@ func main() {
 			case "info":
 				msg.Text = "Author:@Kernux\nBuild:Development\nServer:@F0x3d\nHello World:Hello,World!"
 			default:
-
+				msg.Text = "Correct your command please"
 			}
 			bot.Send(msg)
 		}
