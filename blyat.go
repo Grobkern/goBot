@@ -343,9 +343,9 @@ func main() {
 			case "productplacement":
 				msg.Text = "Привет, сегодня днем тут в чате у меня спрашивали про инстересную тему, которую я нашел, вот ссылка на нее - @Kernux(ссылка в ЛС)\n\nГлавное понять правильно как использовать выгодно инфу что там есть, у меня получилось ну очень прибыльно!)"
 			case "info":
-				msg.Text = "Author:@Kernux\nBuild:Development\nServer:@F0x3d\nHello World:Hello,World!"
+				msg.Text = "Author:@Kernux\nHello World:Hello,World!"
 			default:
-				msg.Text = "Correct your command please"
+				//msg.Text = "Correct your command please"
 			}
 			bot.Send(msg)
 		}
