@@ -196,8 +196,8 @@ func main() {
 		stableID    int
 		strstableID string
 	)
-	var token = "669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA"
-	bot, err := tgbotapi.NewBotAPI("669872325:AAFU0Fn6QHXnoU12LYi7CxxXem2GF8eemDA")
+	var token = "TOKEN"
+	bot, err := tgbotapi.NewBotAPI("TOKEN")
 	if err != nil {
 		log.Panic(err)
 	}
